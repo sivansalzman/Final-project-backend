@@ -1,8 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema({
-    id: { type: Number},
-    
+    googleID: {type: String, require:true}    
 },{collection: 'users'});
 
 

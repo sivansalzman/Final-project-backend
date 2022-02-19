@@ -58,7 +58,6 @@ const candidateSchema = new Schema({
 
 },{collection: 'candidates'});
 
-
 const Candidate = model('Candidate', candidateSchema);
 
 module.exports = Candidate;

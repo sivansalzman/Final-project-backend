@@ -14,7 +14,6 @@ const locationSchema = new Schema({
 });
 
 const companySchema = new Schema({
-    //id: { type: Number},
     name: {type: String},
     size: {type: String},
     employee_count: {type: Number},
