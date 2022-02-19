@@ -1,4 +1,3 @@
-const { response } = require('express');
 const Company = require('../models/company');
 
 exports.companyDBController = {
@@ -16,8 +15,8 @@ exports.companyDBController = {
     },
     
     deleteCompany(req, res) {
-        Company.findOneAndDelete({googleID: req.params.id})
-            .then(() => res.json({googleID: `${req.params.id}`}))
+        Company.findOneAndDelete({id: req.params.id})
+            .then(() => res.json({id: `${req.params.id}`}))
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
     

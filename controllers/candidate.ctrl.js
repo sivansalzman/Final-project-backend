@@ -15,7 +15,7 @@ exports.candidateDBController = {
     },
     
     deleteCandidate(req, res) {
-        Candidate.findOneAndDelete({googleID: req.params.id})
+        Candidate.findOneAndDelete({id: req.params.id})
             .then(() => res.json({googleID: `${req.params.id}`}))
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
