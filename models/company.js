@@ -27,6 +27,7 @@ const companySchema = new Schema({
     profiles: {type: [String]},
     website: {type: String},
     ticker: {type: String},
+    type: {type: String},
     summery: {type: String},
     tags: {type: [String]},
     headline: {type: String},

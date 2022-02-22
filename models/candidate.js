@@ -1,16 +1,18 @@
 const { Schema, model } = require('mongoose');
 
+const titleSchema = new Schema({
+    name: {type: String},
+    role: {type: String},
+    sub_role: {type: String},
+    level: {type: [String]}
+})
+
 const companyExperienceSchema = new Schema({
     company_id: {type: String},
     location_names: {type: [String]},
     end_date: {type: String},
     start_date: {type: String},
-    title: {
-        name: {type: String},
-        role: {type: String},
-        sub_role: {type: String},
-        level: {type: [String]}
-    },
+    title: {type: titleSchema},
     is_primary: {type: Boolean},
 })
 
