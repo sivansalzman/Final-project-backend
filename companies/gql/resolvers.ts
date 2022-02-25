@@ -1,6 +1,6 @@
 import { ApolloError } from "apollo-server-errors";
 import { Company, GetCompanyInput } from "../types";
-import { getCompanies, getCompany } from "../models/companies";
+import { getCompanies, getCompany, addCompany } from "../models/companies";
 
 const resolvers = {
   Query: {
@@ -15,6 +15,9 @@ const resolvers = {
       const company = getCompany(companyName);
       return company;
     },
+  },
+  Mutation: {
+    addCompany: async (parent, args, context, info) => {},
   },
 };
 export default resolvers;

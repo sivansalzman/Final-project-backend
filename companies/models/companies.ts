@@ -19,5 +19,14 @@ const getCompany = (name: string) => {
   const company = getCompanies().find((c) => c.name === name);
   return company;
 };
+const addCompany = () => {
+  //
+};
+const updateCompany = () => {
+  //
+};
+const deleteCompany = () => {
+  //
+};
 
-export { getCompanies, getCompany };
+export { getCompanies, getCompany, addCompany, updateCompany, deleteCompany };
