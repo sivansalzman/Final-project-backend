@@ -35,9 +35,16 @@ const typeDefs = gql`
     postal_code: String
     geo: String
   }
+  "Input object for getting company"
+  input GetCompanyInput {
+    "ID of the connector we wish to get"
+    companyName: String!
+  }
   type Query {
     "Will return all companies"
     getCompanies: [Company]
+    "Will return specific company"
+    getCompany(getCompanyInput: GetCompanyInput!): Company
   }
 `;
 

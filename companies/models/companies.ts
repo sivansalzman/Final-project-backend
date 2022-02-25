@@ -15,5 +15,9 @@ const getCompanies = () => {
   }
   return [...companies];
 };
+const getCompany = (name: string) => {
+  const company = getCompanies().find((c) => c.name === name);
+  return company;
+};
 
-export { getCompanies };
+export { getCompanies, getCompany };

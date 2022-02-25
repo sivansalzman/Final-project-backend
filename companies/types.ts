@@ -1,35 +1,39 @@
 export interface Company {
-  name: String;
-  size: String;
+  name: string;
+  size: string;
   employee_count: Number;
   founded: Number;
-  industry: String;
+  industry: string;
   location: location;
-  linkedin_id: String;
-  linkedin_url: String;
-  facebook_url: String;
-  twitter_url: String;
-  profiles: String[];
-  website: String;
-  ticker: String;
-  type: String;
-  summary: String;
-  tags: String[];
-  headline: String;
-  alternative_names: String[];
-  alternative_domains: String[];
-  affiliated_profiles: String[];
+  linkedin_id: string;
+  linkedin_url: string;
+  facebook_url: string;
+  twitter_url: string;
+  profiles: string[];
+  website: string;
+  ticker: string;
+  type: string;
+  summary: string;
+  tags: string[];
+  headline: string;
+  alternative_names: string[];
+  alternative_domains: string[];
+  affiliated_profiles: string[];
 }
 
 export interface location {
-  name: String;
-  locality: String;
-  region: String;
-  metro: String;
-  country: String;
-  continent: String;
-  street_address: String;
-  address_line_2: String;
-  postal_code: String;
-  geo: String;
+  name: string;
+  locality: string;
+  region: string;
+  metro: string;
+  country: string;
+  continent: string;
+  street_address: string;
+  address_line_2: string;
+  postal_code: string;
+  geo: string;
+}
+
+export interface GetCompanyInput {
+  companyName: string;
 }
