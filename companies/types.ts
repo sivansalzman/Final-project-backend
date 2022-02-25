@@ -9,27 +9,27 @@ export interface Company {
   linkedin_url: String;
   facebook_url: String;
   twitter_url: String;
-  profiles: [String];
+  profiles: String[];
   website: String;
   ticker: String;
   type: String;
-  summery: String;
-  tags: [String];
+  summary: String;
+  tags: String[];
   headline: String;
-  alternative_names: [String];
-  alternative_domains: [String];
-  affiliated_profiles: [String];
+  alternative_names: String[];
+  alternative_domains: String[];
+  affiliated_profiles: String[];
 }
 
 export interface location {
-    name: String,
-    locality: String,
-    region: String,
-    metro: String,
-    country: String,
-    continent: String,
-    street_address: String,
-    address_line_2: String,
-    postal_code: String,
-    geo: String,
+  name: String;
+  locality: String;
+  region: String;
+  metro: String;
+  country: String;
+  continent: String;
+  street_address: String;
+  address_line_2: String;
+  postal_code: String;
+  geo: String;
 }
