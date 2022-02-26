@@ -1,34 +1,25 @@
 import { Schema, model } from "mongoose";
 
-const titleSchema = new Schema({
-  name: { type: String },
-  role: { type: String },
-  sub_role: { type: String },
-  level: { type: [String] },
-});
-const companyExperienceSchema = new Schema({
+const experienceSchema = new Schema({
   company_id: { type: String },
-  location_names: { type: [String] },
+  company_name: { type: String },
+  company_founded: { type: String },
+  company_industry: { type: String },
+  company_size: { type: String },
+  current_job: { type: Boolean },
+  company_location_name: { type: [String] },
+  company_location_country: { type: String },
+  company_location_continent: { type: String },
   end_date: { type: String },
   start_date: { type: String },
-  title: { type: titleSchema },
-  is_primary: { type: Boolean },
-});
-
-const schoolSchema = new Schema({
-  name: { type: String },
-  type: { type: String },
-  id: { type: String },
-  location: { type: String },
-  linkedin_url: { type: String },
-  facebook_url: { type: String },
-  twitter_url: { type: String },
-  website: { type: String },
-  domain: { type: String },
+  title_name: { type: String },
+  title_role: { type: String },
+  title_levels: { type: [String] },
 });
 
 const educationSchema = new Schema({
-  school: { type: schoolSchema },
+  school_name: { type: String },
+  school_type: { type: String },
   degrees: { type: [String] },
   start_date: { type: String },
   end_date: { type: String },
@@ -37,13 +28,11 @@ const educationSchema = new Schema({
   gpa: { type: Number },
 });
 
-const experienceSchema = new Schema({
-  company: { type: companyExperienceSchema },
-});
-
 const candidateSchema = new Schema(
   {
     full_name: { type: String },
+    first_name: { type: String },
+    last_name: { type: String },
     gender: { type: String },
     birth_year: { type: Number },
     birth_date: { type: String },
@@ -53,6 +42,8 @@ const candidateSchema = new Schema(
     job_title_sub_role: { type: String },
     job_title_levels: { type: [String] },
     job_company_id: { type: String },
+    job_company_name: { type: String },
+    job_start_date: { type: String },
     interests: { type: [String] },
     skills: { type: [String] },
     experience: { type: [experienceSchema] },

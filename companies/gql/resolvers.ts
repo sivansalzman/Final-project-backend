@@ -30,8 +30,8 @@ const resolvers = {
   Mutation: {
     addCompany: async (parent, args, context, info) => {
       try {
-        const addCompanyInput =
-          args.addCompanyInput as AddCompanyInput as Company;
+        const addCompanyInput = args.addCompanyInput
+          .companyInfo as AddCompanyInput;
         if (await CompanyCollection.insertMany(addCompanyInput)) {
           return true;
         }

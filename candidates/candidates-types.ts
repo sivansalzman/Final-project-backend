@@ -1,6 +1,8 @@
 export interface Candidate {
   _id: string;
   full_name: string;
+  first_name: string;
+  last_name: string;
   gender: string;
   birth_year: string;
   birth_date: string;
@@ -10,46 +12,34 @@ export interface Candidate {
   job_title_sub_role: string;
   job_title_levels: string[];
   job_company_id: string;
+  job_company_name: string;
+  job_start_date: string;
   interests: string[];
   skills: string[];
   experience: experience[];
   education: education[];
 }
 
-export interface title {
-  name: string;
-  role: string;
-  sub_role: string;
-  level: string[];
-}
-
-export interface companyExperience {
+export interface experience {
   company_id: string;
-  location_names: string[];
+  company_name: string;
+  company_founded: string;
+  company_industry: string;
+  company_size: string;
+  current_job: boolean;
+  company_location_name: string[];
+  company_location_country: string;
+  company_location_continent: string;
   end_date: string;
   start_date: string;
-  title: title;
-  is_primary: Boolean;
-}
-
-export interface experience {
-  company: companyExperience;
-}
-
-export interface school {
-  name: string;
-  type: string;
-  id: string;
-  location: string;
-  linkedin_url: string;
-  facebook_url: string;
-  twitter_url: string;
-  website: string;
-  domain: string;
+  title_name: string;
+  title_role: string;
+  title_levels: string[];
 }
 
 export interface education {
-  school: school;
+  school_name: string;
+  school_type: string;
   degrees: string[];
   start_date: string;
   end_date: string;
@@ -58,6 +48,40 @@ export interface education {
   gpa: string;
 }
 
+export interface CandidateInput {
+  candidateID: string;
+  full_name: string;
+  first_name: string;
+  last_name: string;
+  gender: string;
+  birth_year: string;
+  birth_date: string;
+  industry: string;
+  job_title: string;
+  job_title_role: string;
+  job_title_sub_role: string;
+  job_title_levels: string[];
+  job_company_id: string;
+  job_company_name: string;
+  job_start_date: string;
+  interests: string[];
+  skills: string[];
+  experience: experience[];
+  education: education[];
+}
 export interface GetCandidateInput {
+  candidateID: string;
+}
+
+export interface AddCandidateInput {
+  candidateInfo: CandidateInput;
+}
+
+export interface UpdateCandidateInput {
+  candidateID: string;
+  candidateInfo: CandidateInput;
+}
+
+export interface DeleteCandidateInput {
   candidateID: string;
 }

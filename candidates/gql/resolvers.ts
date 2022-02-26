@@ -1,5 +1,12 @@
 import { CandidateCollection } from "../models/candidate";
-import { Candidate, GetCandidateInput } from "../candidates-types";
+import {
+  AddCandidateInput,
+  Candidate,
+  CandidateInput,
+  DeleteCandidateInput,
+  GetCandidateInput,
+  UpdateCandidateInput,
+} from "../candidates-types";
 
 const resolvers = {
   Query: {
@@ -23,50 +30,50 @@ const resolvers = {
       }
     },
   },
-  // Mutation: {
-  //   addCandidate: async (parent, args, context, info) => {
-  //     try {
-  //       const addcandidateInput =
-  //         args.addcandidateInput as AddcandidateInput as candidate;
-  //       if (await CandidateCollection.insertMany(addcandidateInput)) {
-  //         return true;
-  //       }
-  //       return false;
-  //     } catch (err) {
-  //       throw err;
-  //     }
-  //   },
-  //   updateCandidate: async (parent, args, context, info) => {
-  //     try {
-  //       const updatecandidateID = args.updatecandidateInput
-  //         .candidateID as UpdatecandidateInput["candidateID"];
-  //       const update = args.updatecandidateInput
-  //         .candidateInfo as UpdatecandidateInput["candidateInfo"];
-  //       if (
-  //         await CandidateCollection.updateOne({ id: updatecandidateID }, update)
-  //       ) {
-  //         return true;
-  //       }
-  //       return false;
-  //     } catch (err) {
-  //       throw err;
-  //     }
-  //   },
-  //   deleteCandidate: async (parent, args, context, info) => {
-  //     try {
-  //       const deletecandidateID =
-  //         args.deletecandidateInput as DeletecandidateInput;
-  //       if (
-  //         await CandidateCollection.findOneAndDelete({ id: deletecandidateID })
-  //       ) {
-  //         return true;
-  //       }
-  //       return false;
-  //     } catch (err) {
-  //       throw err;
-  //     }
-  //   },
-  //},
+  Mutation: {
+    addCandidate: async (parent, args, context, info) => {
+      try {
+        const addCandidateInput = args.addCandidateInput
+          .candidateInfo as AddCandidateInput;
+        if (await CandidateCollection.insertMany(addCandidateInput)) {
+          return true;
+        }
+        return false;
+      } catch (err) {
+        throw err;
+      }
+    },
+    updateCandidate: async (parent, args, context, info) => {
+      try {
+        const updateCandidateID = args.updateCandidateInput
+          .candidateID as UpdateCandidateInput["candidateID"];
+        const update = args.updateCandidateInput
+          .candidateInfo as UpdateCandidateInput["candidateInfo"];
+        if (
+          await CandidateCollection.updateOne({ id: updateCandidateID }, update)
+        ) {
+          return true;
+        }
+        return false;
+      } catch (err) {
+        throw err;
+      }
+    },
+    deleteCandidate: async (parent, args, context, info) => {
+      try {
+        const deleteCandidateID =
+          args.deleteCandidateInput as DeleteCandidateInput;
+        if (
+          await CandidateCollection.findOneAndDelete({ id: deleteCandidateID })
+        ) {
+          return true;
+        }
+        return false;
+      } catch (err) {
+        throw err;
+      }
+    },
+  },
 };
 
 export default resolvers;
