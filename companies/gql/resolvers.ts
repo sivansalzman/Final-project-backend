@@ -5,7 +5,7 @@ import {
   DeleteCompanyInput,
   GetCompanyInput,
   UpdateCompanyInput,
-} from "../types";
+} from "../companies-types";
 
 const resolvers = {
   Query: {
@@ -21,7 +21,6 @@ const resolvers = {
       try {
         const { companyID } = args.getCompanyInput as GetCompanyInput;
         const company = await CompanyCollection.findOne({ id: companyID });
-        console.log(companyID);
         return company;
       } catch (err) {
         throw err;
