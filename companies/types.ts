@@ -1,4 +1,5 @@
 export interface Company {
+  _id: String;
   name: string;
   size: string;
   employee_count: Number;
@@ -35,7 +36,7 @@ export interface location {
 }
 
 export interface GetCompanyInput {
-  companyName: string;
+  companyID: string;
 }
 
 export interface AddCompanyInput {
@@ -61,7 +62,7 @@ export interface AddCompanyInput {
   affiliated_profiles: string[];
 }
 
-export interface UpdateCompanyInput {
+export interface CompanyInput {
   companyID: string;
   name: string;
   size: string;
@@ -83,6 +84,11 @@ export interface UpdateCompanyInput {
   alternative_names: [string];
   alternative_domains: [string];
   affiliated_profiles: [string];
+}
+
+export interface UpdateCompanyInput {
+  companyID: string;
+  companyInfo: CompanyInput;
 }
 
 export interface DeleteCompanyInput {

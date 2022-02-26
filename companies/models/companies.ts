@@ -1,19 +1,21 @@
 import { Company } from "../types";
-import Companies from "./companys.json";
+const Companies = require("./company");
 
 const companies: Company[] = [];
 
 const separateCompanies = () => {
   Companies.forEach((companyObject) => {
+    console.log(companyObject);
     companies.push(companyObject as Company);
   });
 };
 const getCompanies = () => {
-  separateCompanies();
-  if (companies.length === 0) {
-    return [];
+  try {
+    const companies =  Companies.find();
+    return companies;
+  } catch (err) {
+    throw err;
   }
-  return [...companies];
 };
 const getCompany = (name: string) => {
   const company = getCompanies().find((c) => c.name === name);

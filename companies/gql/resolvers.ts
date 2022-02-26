@@ -1,23 +1,74 @@
-import { ApolloError } from "apollo-server-errors";
-import { Company, GetCompanyInput } from "../types";
-import { getCompanies, getCompany, addCompany } from "../models/companies";
+import { CompanyCollection } from "../models/company";
+import {
+  AddCompanyInput,
+  Company,
+  DeleteCompanyInput,
+  GetCompanyInput,
+  UpdateCompanyInput,
+} from "../types";
 
 const resolvers = {
   Query: {
     getCompanies: async (parent, args, context, info) => {
-      const { org_id } = context.payload;
-      const companies = getCompanies();
-      return companies;
+      try {
+        const companies = await CompanyCollection.find();
+        return companies;
+      } catch (err) {
+        throw err;
+      }
     },
     getCompany: async (parent, args, context, info) => {
-      const { org_id } = context.payload;
-      const { companyName } = args.getCompanyInput as GetCompanyInput;
-      const company = getCompany(companyName);
-      return company;
+      try {
+        const { companyID } = args.getCompanyInput as GetCompanyInput;
+        const company = await CompanyCollection.findOne({ id: companyID });
+        console.log(companyID);
+        return company;
+      } catch (err) {
+        throw err;
+      }
     },
   },
   Mutation: {
-    addCompany: async (parent, args, context, info) => {},
+    addCompany: async (parent, args, context, info) => {
+      try {
+        const addCompanyInput =
+          args.addCompanyInput as AddCompanyInput as Company;
+        if (await CompanyCollection.insertMany(addCompanyInput)) {
+          return true;
+        }
+        return false;
+      } catch (err) {
+        throw err;
+      }
+    },
+    updateCompany: async (parent, args, context, info) => {
+      try {
+        const updateCompanyID = args.updateCompanyInput
+          .companyID as UpdateCompanyInput["companyID"];
+        const update = args.updateCompanyInput
+          .companyInfo as UpdateCompanyInput["companyInfo"];
+        if (
+          await CompanyCollection.updateOne({ id: updateCompanyID }, update)
+        ) {
+          return true;
+        }
+        return false;
+      } catch (err) {
+        throw err;
+      }
+    },
+    deleteCompany: async (parent, args, context, info) => {
+      try {
+        const deleteCompanyID = args.deleteCompanyInput as DeleteCompanyInput;
+        if (await CompanyCollection.findOneAndDelete({ id: deleteCompanyID })) {
+          return true;
+        }
+        return false;
+      } catch (err) {
+        throw err;
+      }
+    },
   },
 };
+
 export default resolvers;

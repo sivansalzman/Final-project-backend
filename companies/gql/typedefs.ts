@@ -1,7 +1,8 @@
-const { gql } = require("apollo-server");
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Company {
+    _id: String
     name: String
     size: String
     employee_count: String
@@ -39,7 +40,7 @@ const typeDefs = gql`
   "Input object for getting company"
   input GetCompanyInput {
     "ID of the company we wish to get"
-    companyName: String!
+    companyID: String!
   }
   "Add location input"
   input AddLocationInput {
@@ -80,7 +81,7 @@ const typeDefs = gql`
   }
 
   "Update company input"
-  input UpdateCompanyInput {
+  input CompanyInput {
     companyID: String
     name: String
     size: String
@@ -109,6 +110,11 @@ const typeDefs = gql`
     companyID: String
   }
 
+  input UpdateCompanyInput {
+    companyID: String
+    companyInfo: CompanyInput
+  }
+
   type Query {
     "Will return all companies"
     getCompanies: [Company]
@@ -117,11 +123,11 @@ const typeDefs = gql`
   }
   type Mutation {
     "Will add company"
-    addCompany(addCompanyInput: AddCompanyInput!): Company
+    addCompany(addCompanyInput: AddCompanyInput!): Boolean
     "Will update company"
-    updateCompany(updateCompanyInput: UpdateCompanyInput!): Company
+    updateCompany(updateCompanyInput: UpdateCompanyInput!): Boolean
     "Will delete company"
-    deleteCompany(deleteCompanyInput: DeleteCompanyInput!): Company
+    deleteCompany(deleteCompanyInput: DeleteCompanyInput!): Boolean
   }
 `;
 

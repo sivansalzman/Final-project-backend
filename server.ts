@@ -1,26 +1,26 @@
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-express";
 import { typeDefs, resolvers } from "./.gql";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import express from "express";
 
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
-  apollo: {
-    key: process.env.APOLLO_KEY,
-    graphId: process.env.APOLLO_GRAPH_ID,
-    graphVariant: process.env.SERVER_ENVIRONMENT,
-  },
-  context: ({ req }) => {
-    const payload = req;
-    return {
-      payload,
-    };
-  },
-});
+async function startApolloServer() {
+  const app = express();
 
-apolloServer
-  .listen({
-    port: process.env.SERVER_PORT,
-  })
-  .then(async ({ url }) => {
-    console.log(`Server ready at ${url}graphql`);
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
   });
+
+  const server = new ApolloServer({
+    schema: schema,
+  });
+
+  await server.start();
+  server.applyMiddleware({ app, path: "/graphql" });
+
+  app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server ready at port ${process.env.SERVER_PORT}`);
+  });
+}
+
+startApolloServer();
