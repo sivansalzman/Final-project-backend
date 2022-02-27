@@ -1,7 +1,6 @@
 import { CompanyCollection } from "../models/company";
 import {
   AddCompanyInput,
-  Company,
   DeleteCompanyInput,
   GetCompanyInput,
   UpdateCompanyInput,
