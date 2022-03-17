@@ -2,7 +2,6 @@ import { CandidateCollection } from "../models/candidate";
 import {
   AddCandidateInput,
   Candidate,
-  CandidateInput,
   DeleteCandidateInput,
   GetCandidateInput,
   UpdateCandidateInput,

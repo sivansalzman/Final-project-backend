@@ -8,7 +8,12 @@ import {
   resolvers as candidatesResolvers,
 } from "./candidates/gql";
 
-const typeDefs = [companiesTypeDefs, candidatesTypeDefs];
-const resolvers = [companiesResolvers, candidatesResolvers];
+import {
+  typeDefs as jobOffersTypeDefs,
+  resolvers as jobOffersResolvers,
+} from "./job-offer/gql";
+
+const typeDefs = [companiesTypeDefs, candidatesTypeDefs, jobOffersTypeDefs];
+const resolvers = [companiesResolvers, candidatesResolvers, jobOffersResolvers];
 
 export { typeDefs, resolvers };
