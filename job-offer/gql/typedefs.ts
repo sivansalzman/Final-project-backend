@@ -11,6 +11,7 @@ const typeDefs = gql`
     job_start_date: String
     experience: experience
     status: String
+    candidates_id: [String]
   }
 
   type experience {
@@ -23,6 +24,10 @@ const typeDefs = gql`
   input GetJobOfferInput {
     "ID of the company we wish to get"
     jobOfferID: String!
+  }
+
+  input GetJobOfferInputCandidate {
+    CandidateJobOfferID: String!
   }
   "Add experience input"
   input AddExperienceInput {
@@ -42,6 +47,7 @@ const typeDefs = gql`
     job_start_date: String
     experience: AddExperienceInput
     status: String
+    candidates_id: [String]
   }
 
   "Update job offer input"
@@ -54,6 +60,7 @@ const typeDefs = gql`
     job_start_date: String
     experience: AddExperienceInput
     status: String
+    candidates_id: [String]
   }
 
   "Delete job offer input"
@@ -71,6 +78,10 @@ const typeDefs = gql`
     getJobsOffers: [JobOffer]
     "Will return specific company"
     getJobOffer(GetJobOfferInput: GetJobOfferInput!): JobOffer
+
+    getJobOfferByCandidate(
+      GetJobOfferInputCandidate: GetJobOfferInputCandidate!
+    ): [JobOffer]
   }
   type Mutation {
     "Will add company"

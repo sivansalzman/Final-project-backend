@@ -18,6 +18,7 @@ const jobOfferSchema = new Schema(
     job_start_date: { type: String },
     experience: { type: experienceSchema },
     status: { type: String },
+    candidates_id: { type: [String] },
   },
   { collection: "jobOffers" }
 );

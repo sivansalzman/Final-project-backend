@@ -3,6 +3,7 @@ import {
   AddJobOfferInput,
   DeleteJobOfferInput,
   GetJobOfferInput,
+  GetJobOfferInputCandidate,
   UpdateJobOfferInput,
 } from "../job-offer-types";
 
@@ -21,6 +22,19 @@ const resolvers = {
         const { JobOfferID } = args.getJobOfferInput as GetJobOfferInput;
         const jobOffer = await JobOfferCollection.findOne({ id: JobOfferID });
         return jobOffer;
+      } catch (err) {
+        throw err;
+      }
+    },
+    getJobOfferByCandidate: async (parent, args, context, info) => {
+      try {
+        const { CandidateJobOfferID } =
+          args.GetJobOfferInputCandidate as GetJobOfferInputCandidate;
+        const jobOfferByCandidate = await JobOfferCollection.find({
+          candidates_id: { $in: CandidateJobOfferID },
+        });
+        console.log(jobOfferByCandidate);
+        return jobOfferByCandidate;
       } catch (err) {
         throw err;
       }

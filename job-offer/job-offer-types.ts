@@ -8,6 +8,7 @@ export interface JobOffer {
   job_start_date: string;
   experience: experience;
   status: string;
+  candidates_id: string[];
 }
 
 export interface experience {
@@ -21,6 +22,10 @@ export interface GetJobOfferInput {
   JobOfferID: string;
 }
 
+export interface GetJobOfferInputCandidate {
+  CandidateJobOfferID: string;
+}
+
 export interface JobOfferInput {
   JobOfferID: string;
   job_company_name: string;
@@ -31,6 +36,7 @@ export interface JobOfferInput {
   job_start_date: string;
   experience: experience;
   status: string;
+  candidates_id: string[];
 }
 
 export interface AddJobOfferInput {
