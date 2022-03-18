@@ -10,6 +10,7 @@ const typeDefs = gql`
     role_description: String
     job_start_date: String
     experience: experience
+    status: String
   }
 
   type experience {
@@ -40,6 +41,7 @@ const typeDefs = gql`
     role_description: String
     job_start_date: String
     experience: AddExperienceInput
+    status: String
   }
 
   "Update job offer input"
@@ -51,6 +53,7 @@ const typeDefs = gql`
     role_description: String
     job_start_date: String
     experience: AddExperienceInput
+    status: String
   }
 
   "Delete job offer input"
@@ -73,9 +76,9 @@ const typeDefs = gql`
     "Will add company"
     addJobOffer(addJobOffer: AddJobOfferInput!): Boolean
     "Will update company"
-    updateJobOffer(updateCompanyInput: UpdateJobOfferInput!): Boolean
+    updateJobOffer(updatejobOfferInput: UpdateJobOfferInput!): Boolean
     "Will delete company"
-    deleteJobOffer(deleteCompanyInput: DeleteJobOfferInput!): Boolean
+    deleteJobOffer(deleteJobOfferInput: DeleteJobOfferInput!): Boolean
   }
 `;
 

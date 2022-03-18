@@ -7,6 +7,7 @@ export interface JobOffer {
   role_description: string;
   job_start_date: string;
   experience: experience;
+  status: string;
 }
 
 export interface experience {
@@ -29,6 +30,7 @@ export interface JobOfferInput {
   role_description: string;
   job_start_date: string;
   experience: experience;
+  status: string;
 }
 
 export interface AddJobOfferInput {

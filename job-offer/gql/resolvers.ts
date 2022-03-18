@@ -57,6 +57,7 @@ const resolvers = {
     },
     deleteJobOffer: async (parent, args, context, info) => {
       try {
+        console.log("here");
         const deleteJobOfferID =
           args.deletejobOfferInput as DeleteJobOfferInput;
         if (
