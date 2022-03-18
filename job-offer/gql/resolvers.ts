@@ -43,9 +43,10 @@ const resolvers = {
   Mutation: {
     addJobOffer: async (parent, args, context, info) => {
       try {
-        const addjobOfferInput = args.addjobOfferInput
+        console.log(args);
+        const addJobOfferInput = args.addJobOffer
           .jobOfferInfo as AddJobOfferInput;
-        if (await JobOfferCollection.insertMany(addjobOfferInput)) {
+        if (await JobOfferCollection.insertMany(addJobOfferInput)) {
           return true;
         }
         return false;
