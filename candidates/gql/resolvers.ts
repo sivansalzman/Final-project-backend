@@ -4,6 +4,7 @@ import {
   Candidate,
   DeleteCandidateInput,
   GetCandidateInput,
+  GetCandidatesInput,
   UpdateCandidateInput,
 } from "../candidates-types";
 
@@ -24,6 +25,18 @@ const resolvers = {
           id: candidateID,
         });
         return candidate;
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    getCandidatesById: async (parent, args, context, info) => {
+      try {
+        const { candidatesID } = args.getCandidatesInput as GetCandidatesInput;
+        const candidatesById = await CandidateCollection.find({
+          _id: { $in: candidatesID },
+        });
+        return candidatesById;
       } catch (err) {
         throw err;
       }

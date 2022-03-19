@@ -56,6 +56,10 @@ const typeDefs = gql`
     candidateID: String!
   }
 
+  input GetCandidatesInput {
+    candidatesID: [String]!
+  }
+
   "Delete candidate input"
   input DeleteCandidateInput {
     candidateID: String
@@ -124,6 +128,8 @@ const typeDefs = gql`
     getCandidates: [Candidate]
     "Will return candidate by id"
     getCandidate(getCandidateInput: GetCandidateInput!): Candidate
+
+    getCandidatesById(getCandidatesInput: GetCandidatesInput!): [Candidate]
   }
 
   type Mutation {
