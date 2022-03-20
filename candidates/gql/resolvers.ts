@@ -22,7 +22,6 @@ const resolvers = {
     getCandidate: async (parent, args, context, info) => {
       try {
         const { candidateID } = args.getCandidateInput as GetCandidateInput;
-        console.log(candidateID);
         const candidate = await CandidateCollection.findOne({
           _id: candidateID,
         });
