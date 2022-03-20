@@ -72,7 +72,7 @@ const typeDefs = gql`
 
   input UpdateJobOfferInput {
     jobOfferID: String
-    jobOfferInput: UpdateJobOfferInput
+    jobOfferInfo: UpdateJobOfferInput
   }
 
   type Query {

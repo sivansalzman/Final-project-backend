@@ -54,7 +54,7 @@ const resolvers = {
     updateJobOffer: async (parent, args, context, info) => {
       try {
         const updateJobOfferID = args.updatejobOfferInput
-          .JobOfferID as UpdateJobOfferInput["jobOfferID"];
+          .jobOfferID as UpdateJobOfferInput["jobOfferID"];
         const update = args.updatejobOfferInput
           .jobOfferInfo as UpdateJobOfferInput["jobOfferInfo"];
         if (

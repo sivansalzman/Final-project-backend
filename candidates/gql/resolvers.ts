@@ -7,6 +7,7 @@ import {
   GetCandidatesInput,
   UpdateCandidateInput,
 } from "../candidates-types";
+import { Console } from "console";
 
 const resolvers = {
   Query: {
@@ -21,9 +22,11 @@ const resolvers = {
     getCandidate: async (parent, args, context, info) => {
       try {
         const { candidateID } = args.getCandidateInput as GetCandidateInput;
+        console.log(candidateID);
         const candidate = await CandidateCollection.findOne({
-          id: candidateID,
+          _id: candidateID,
         });
+        console.log(candidate);
         return candidate;
       } catch (err) {
         throw err;

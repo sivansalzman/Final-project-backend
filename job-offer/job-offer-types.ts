@@ -28,7 +28,6 @@ export interface GetJobOfferInputCandidate {
 }
 
 export interface JobOfferInput {
-  JobOfferID: string;
   job_company_name: string;
   job_title: string;
   job_title_role: string;
