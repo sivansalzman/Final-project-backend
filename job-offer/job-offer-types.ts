@@ -6,7 +6,8 @@ export interface JobOffer {
   job_title_sub_role: string;
   role_description: string;
   job_start_date: string;
-  experience: experience;
+  years_of_experience: string;
+  skills: string[];
   status: string;
   candidates_id: string[];
 }
@@ -34,7 +35,8 @@ export interface JobOfferInput {
   job_title_sub_role: string;
   role_description: string;
   job_start_date: string;
-  experience: experience;
+  years_experience: string;
+  skills: string[];
   status: string;
   candidates_id: string[];
 }

@@ -9,7 +9,8 @@ const typeDefs = gql`
     job_title_sub_role: String
     role_description: String
     job_start_date: String
-    experience: experience
+    years_of_experience: String
+    skills: [String]
     status: String
     candidates_id: [String]
   }
@@ -45,7 +46,8 @@ const typeDefs = gql`
     job_title_sub_role: String
     role_description: String
     job_start_date: String
-    experience: AddExperienceInput
+    years_of_experience: String
+    skills: [String]
     status: String
     candidates_id: [String]
   }

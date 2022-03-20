@@ -42,8 +42,7 @@ const resolvers = {
   Mutation: {
     addJobOffer: async (parent, args, context, info) => {
       try {
-        const addJobOfferInput = args.addJobOffer
-          .jobOfferInfo as AddJobOfferInput;
+        const addJobOfferInput = args.addJobOffer;
         if (await JobOfferCollection.insertMany(addJobOfferInput)) {
           return true;
         }
@@ -71,9 +70,11 @@ const resolvers = {
     deleteJobOffer: async (parent, args, context, info) => {
       try {
         const deleteJobOfferID =
-          args.deletejobOfferInput as DeleteJobOfferInput;
+          args.deleteJobOfferInput as DeleteJobOfferInput;
         if (
-          await JobOfferCollection.findOneAndDelete({ id: deleteJobOfferID })
+          await JobOfferCollection.findOneAndDelete({
+            id: deleteJobOfferID.jobOfferID,
+          })
         ) {
           return true;
         }

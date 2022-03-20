@@ -1,12 +1,5 @@
 import { Schema, model } from "mongoose";
 
-const experienceSchema = new Schema({
-  title_name: { type: String },
-  title_role: { type: String },
-  years_experience: { type: String },
-  skills: { type: [String] },
-});
-
 const jobOfferSchema = new Schema(
   {
     _id: { type: String },
@@ -16,7 +9,8 @@ const jobOfferSchema = new Schema(
     job_title_sub_role: { type: String },
     role_description: { type: String },
     job_start_date: { type: String },
-    experience: { type: experienceSchema },
+    years_experience: { type: String },
+    skills: { type: [String] },
     status: { type: String },
     candidates_id: { type: [String] },
   },
