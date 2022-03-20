@@ -33,7 +33,6 @@ const resolvers = {
         const jobOfferByCandidate = await JobOfferCollection.find({
           candidates_id: { $in: CandidateJobOfferID },
         });
-        console.log(jobOfferByCandidate);
         return jobOfferByCandidate;
       } catch (err) {
         throw err;
@@ -43,7 +42,6 @@ const resolvers = {
   Mutation: {
     addJobOffer: async (parent, args, context, info) => {
       try {
-        console.log(args);
         const addJobOfferInput = args.addJobOffer
           .jobOfferInfo as AddJobOfferInput;
         if (await JobOfferCollection.insertMany(addJobOfferInput)) {
@@ -72,7 +70,6 @@ const resolvers = {
     },
     deleteJobOffer: async (parent, args, context, info) => {
       try {
-        console.log("here");
         const deleteJobOfferID =
           args.deletejobOfferInput as DeleteJobOfferInput;
         if (

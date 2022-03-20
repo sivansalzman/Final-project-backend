@@ -49,7 +49,6 @@ export interface education {
 }
 
 export interface CandidateInput {
-  candidateID: string;
   full_name: string;
   first_name: string;
   last_name: string;

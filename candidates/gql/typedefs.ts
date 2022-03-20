@@ -66,7 +66,6 @@ const typeDefs = gql`
   }
 
   input CandidateInput {
-    candidateID: String
     full_name: String
     first_name: String
     last_name: String
