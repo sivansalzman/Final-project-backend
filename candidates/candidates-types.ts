@@ -76,6 +76,10 @@ export interface GetCandidatesInput {
   candidatesID: string[];
 }
 
+export interface GetCandidatesInputFullName {
+  candidateFullName: string;
+}
+
 export interface AddCandidateInput {
   candidateInfo: CandidateInput;
 }

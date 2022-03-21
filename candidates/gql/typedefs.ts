@@ -60,6 +60,10 @@ const typeDefs = gql`
     candidatesID: [String]!
   }
 
+  input GetCandidatesInputFullName {
+    candidateFullName: String!
+  }
+
   "Delete candidate input"
   input DeleteCandidateInput {
     candidateID: String
@@ -129,6 +133,10 @@ const typeDefs = gql`
     getCandidate(getCandidateInput: GetCandidateInput!): Candidate
 
     getCandidatesById(getCandidatesInput: GetCandidatesInput!): [Candidate]
+
+    getCandidatesByFullName(
+      getCandidatesInputFullName: GetCandidatesInputFullName!
+    ): Candidate
   }
 
   type Mutation {
