@@ -19,7 +19,8 @@ const resolvers = {
     getCompany: async (parent, args, context, info) => {
       try {
         const { companyID } = args.getCompanyInput as GetCompanyInput;
-        const company = await CompanyCollection.findOne({ id: companyID });
+        console.log(companyID);
+        const company = await CompanyCollection.findById({ _id: companyID });
         return company;
       } catch (err) {
         throw err;
@@ -46,7 +47,7 @@ const resolvers = {
         const update = args.updateCompanyInput
           .companyInfo as UpdateCompanyInput["companyInfo"];
         if (
-          await CompanyCollection.updateOne({ id: updateCompanyID }, update)
+          await CompanyCollection.updateOne({ _id: updateCompanyID }, update)
         ) {
           return true;
         }

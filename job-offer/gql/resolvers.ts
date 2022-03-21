@@ -20,7 +20,7 @@ const resolvers = {
     getJobOffer: async (parent, args, context, info) => {
       try {
         const { jobOfferID } = args.getJobOfferInput as GetJobOfferInput;
-        const jobOffer = await JobOfferCollection.findById({ _id: jobOfferID });
+        const jobOffer = await JobOfferCollection.findOne({ _id: jobOfferID });
         return jobOffer;
       } catch (err) {
         throw err;
@@ -60,7 +60,7 @@ const resolvers = {
         if (update.candidates_id != "") {
           if (
             await JobOfferCollection.updateOne(
-              { _id: updateJobOfferID },
+              { job_offer_ID: updateJobOfferID },
               { $push: { candidates_id: update.candidates_id } }
             )
           ) {

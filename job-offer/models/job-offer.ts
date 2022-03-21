@@ -2,7 +2,9 @@ import { Schema, model } from "mongoose";
 
 const jobOfferSchema = new Schema(
   {
+    job_offer_ID: { type: String },
     job_company_name: { type: String },
+    industry: { type: String },
     job_title: { type: String },
     job_title_role: { type: String },
     job_title_sub_role: { type: String },

@@ -2,7 +2,6 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Company {
-    _id: String
     name: String
     size: String
     employee_count: String

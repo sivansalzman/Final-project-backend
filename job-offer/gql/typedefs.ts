@@ -2,8 +2,9 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type JobOffer {
-    _id: String
+    job_offer_ID: String
     job_company_name: String
+    industry: String
     job_title: String
     job_title_role: String
     job_title_sub_role: String
@@ -41,6 +42,7 @@ const typeDefs = gql`
   "Add job offer input"
   input AddJobOfferInput {
     job_company_name: String
+    industry: String
     job_title: String
     job_title_role: String
     job_title_sub_role: String
@@ -54,7 +56,9 @@ const typeDefs = gql`
 
   "Update job offer input"
   input UpdateJobOfferInput {
+    job_offer_ID: String
     job_company_name: String
+    industry: String
     job_title: String
     job_title_role: String
     job_title_sub_role: String
