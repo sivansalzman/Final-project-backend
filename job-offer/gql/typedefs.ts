@@ -62,7 +62,7 @@ const typeDefs = gql`
     job_start_date: String
     experience: AddExperienceInput
     status: String
-    candidates_id: [String]
+    candidates_id: String
   }
 
   "Delete job offer input"
@@ -79,7 +79,7 @@ const typeDefs = gql`
     "Will return all companies"
     getJobsOffers: [JobOffer]
     "Will return specific company"
-    getJobOffer(GetJobOfferInput: GetJobOfferInput!): JobOffer
+    getJobOffer(getJobOfferInput: GetJobOfferInput!): JobOffer
 
     getJobOfferByCandidate(
       GetJobOfferInputCandidate: GetJobOfferInputCandidate!

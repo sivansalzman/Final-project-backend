@@ -20,7 +20,7 @@ export interface experience {
 }
 
 export interface GetJobOfferInput {
-  JobOfferID: string;
+  jobOfferID: string;
 }
 
 export interface GetJobOfferInputCandidate {
@@ -37,7 +37,7 @@ export interface JobOfferInput {
   years_experience: string;
   skills: string[];
   status: string;
-  candidates_id: string[];
+  candidates_id: string;
 }
 
 export interface AddJobOfferInput {

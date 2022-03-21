@@ -19,8 +19,8 @@ const resolvers = {
     },
     getJobOffer: async (parent, args, context, info) => {
       try {
-        const { JobOfferID } = args.getJobOfferInput as GetJobOfferInput;
-        const jobOffer = await JobOfferCollection.findOne({ id: JobOfferID });
+        const { jobOfferID } = args.getJobOfferInput as GetJobOfferInput;
+        const jobOffer = await JobOfferCollection.findById({ _id: jobOfferID });
         return jobOffer;
       } catch (err) {
         throw err;
@@ -57,11 +57,23 @@ const resolvers = {
           .jobOfferID as UpdateJobOfferInput["jobOfferID"];
         const update = args.updatejobOfferInput
           .jobOfferInfo as UpdateJobOfferInput["jobOfferInfo"];
-        if (
-          await JobOfferCollection.updateOne({ id: updateJobOfferID }, update)
-        ) {
-          return true;
+        if (update.candidates_id != "") {
+          if (
+            await JobOfferCollection.updateOne(
+              { _id: updateJobOfferID },
+              { $push: { candidates_id: update.candidates_id } }
+            )
+          ) {
+            return true;
+          }
         }
+        // } else if (
+        //   await JobOfferCollection.updateOne({ id: updateJobOfferID }, update)
+        // ) {
+        //   console.log(update.candidates_id);
+
+        //   return true;
+        // }
         return false;
       } catch (err) {
         throw err;

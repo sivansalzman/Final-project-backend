@@ -25,7 +25,6 @@ const resolvers = {
         const candidate = await CandidateCollection.findOne({
           _id: candidateID,
         });
-        console.log(candidate);
         return candidate;
       } catch (err) {
         throw err;
