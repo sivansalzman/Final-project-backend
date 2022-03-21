@@ -48,11 +48,9 @@ const resolvers = {
       try {
         const { candidateFullName } =
           args.getCandidatesInputFullName as GetCandidatesInputFullName;
-        console.log(candidateFullName);
         const candidate = await CandidateCollection.findOne({
           full_name: candidateFullName,
         });
-        console.log(candidate);
         return candidate;
       } catch (err) {
         throw err;

@@ -19,7 +19,6 @@ const resolvers = {
     getCompany: async (parent, args, context, info) => {
       try {
         const { companyID } = args.getCompanyInput as GetCompanyInput;
-        console.log(companyID);
         const company = await CompanyCollection.findById({ _id: companyID });
         return company;
       } catch (err) {

@@ -29,7 +29,7 @@ const typeDefs = gql`
     company_industry: String
     company_size: String
     current_job: Boolean
-    company_location_name: [String]
+    company_location_name: String
     company_location_country: String
     company_location_continent: String
     end_date: String
@@ -96,7 +96,7 @@ const typeDefs = gql`
     company_industry: String
     company_size: String
     current_job: Boolean
-    company_location_name: [String]
+    company_location_name: String
     company_location_country: String
     company_location_continent: String
     end_date: String

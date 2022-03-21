@@ -1,3 +1,4 @@
+import { GraphQLInt } from "graphql";
 import { Schema, model } from "mongoose";
 
 const experienceSchema = new Schema({
@@ -7,7 +8,7 @@ const experienceSchema = new Schema({
   company_industry: { type: String },
   company_size: { type: String },
   current_job: { type: Boolean },
-  company_location_name: { type: [String] },
+  company_location_name: { type: String },
   company_location_country: { type: String },
   company_location_continent: { type: String },
   end_date: { type: String },
@@ -34,7 +35,7 @@ const candidateSchema = new Schema(
     first_name: { type: String },
     last_name: { type: String },
     gender: { type: String },
-    birth_year: { type: Number },
+    birth_year: { type: String },
     birth_date: { type: String },
     industry: { type: String },
     job_title: { type: String },

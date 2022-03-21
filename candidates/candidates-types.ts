@@ -1,3 +1,5 @@
+import { GraphQLInt } from "graphql/type";
+
 export interface Candidate {
   _id: string;
   full_name: string;
@@ -27,7 +29,7 @@ export interface experience {
   company_industry: string;
   company_size: string;
   current_job: boolean;
-  company_location_name: string[];
+  company_location_name: string;
   company_location_country: string;
   company_location_continent: string;
   end_date: string;
