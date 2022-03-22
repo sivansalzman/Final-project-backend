@@ -2,23 +2,26 @@ import { JobOfferCollection } from "./jobofferModel";
 
 const JobofferController = {
   getJobsOffers: async (req, res) => {
-    await JobOfferCollection.find({})
-      .then((docs) => {
-        res.json(docs);
+    const params = {};
+    if (req.query.candidates_id) {
+      params["candidates_id"] = req.params.candidates_id;
+      await JobOfferCollection.find({
+        candidates_id: { $in: req.query.candidates_id },
       })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else {
+      await JobOfferCollection.find(params)
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    }
   },
   getJobOffer: async (req, res) => {
     await JobOfferCollection.findById({ _id: req.params.id })
-      .then((docs) => {
-        res.json(docs);
-      })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-  },
-  getJobOfferByCandidate: async (req, res) => {
-    await JobOfferCollection.find({
-      candidates_id: { $in: req.body.candidates_id },
-    })
       .then((docs) => {
         res.json(docs);
       })
@@ -36,7 +39,7 @@ const JobofferController = {
     const updateJobOffer = req.body.updateJobOffer;
     await JobOfferCollection.updateOne({ id: req.params.id }, updateJobOffer)
       .then((docs) => {
-        console.log(docs);
+        res.json(docs);
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },

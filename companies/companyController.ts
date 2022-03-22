@@ -27,7 +27,7 @@ const ComController = {
     const updateCompany = req.body.updateCompany;
     await CompanyCollection.updateOne({ id: req.params.id }, updateCompany)
       .then((docs) => {
-        console.log(docs);
+        console.log(docs + "success");
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },

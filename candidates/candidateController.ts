@@ -1,43 +1,33 @@
-import { response } from "express";
 import { CandidateCollection } from "./candidateModel";
-import {
-  AddCandidateInput,
-  Candidate,
-  DeleteCandidateInput,
-  GetCandidateInput,
-  GetCandidatesInput,
-  GetCandidatesInputFullName,
-  UpdateCandidateInput,
-} from "./candidatesTypes";
 
 const CandidateController = {
   getCandidates: async (req, res) => {
-    await CandidateCollection.find({})
-      .then((docs) => {
-        res.json(docs);
+    const params = {};
+    if (req.query.full_name) {
+      params["full_name"] = req.query.full_name;
+      await CandidateCollection.find(params)
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else if (req.query.candidates) {
+      await CandidateCollection.find({
+        id: { $in: req.query.candidates },
       })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else {
+      await CandidateCollection.find({})
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    }
   },
   getCandidate: async (req, res) => {
-    await CandidateCollection.findById({ _id: req.params.id })
-      .then((docs) => {
-        res.json(docs);
-      })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-  },
-
-  getCandidatesById: async (req, res) => {
-    await CandidateCollection.find({
-      _id: { $in: req.params.id },
-    })
-      .then((docs) => {
-        res.json(docs);
-      })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-  },
-
-  getCandidatesByFullName: async (req, res) => {
-    await CandidateCollection.findOne({ _id: req.params.id })
+    await CandidateCollection.findOne({ id: req.params.id })
       .then((docs) => {
         res.json(docs);
       })
