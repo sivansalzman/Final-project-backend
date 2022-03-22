@@ -5,6 +5,7 @@ import {
   GetCompanyInput,
   UpdateCompanyInput,
 } from "../companies-types";
+import { promisify } from "util";
 
 const resolvers = {
   Query: {
@@ -13,6 +14,7 @@ const resolvers = {
         const companies = await CompanyCollection.find();
         return companies;
       } catch (err) {
+        console.log("here");
         throw err;
       }
     },
