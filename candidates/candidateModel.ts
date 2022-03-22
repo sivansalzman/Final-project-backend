@@ -1,4 +1,3 @@
-import { GraphQLInt } from "graphql";
 import { Schema, model } from "mongoose";
 
 const experienceSchema = new Schema({

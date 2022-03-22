@@ -1,53 +1,22 @@
-import { ApolloServer } from "apollo-server-express";
-import { typeDefs, resolvers } from "./.gql";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 import express from "express";
-import { promisify } from "util";
+import cors from "cors";
+const app = express();
+const port = process.env.PORT || 3000;
 
-async function startApolloServer() {
-  const app = express();
+import candidateRouter from "./candidates/candidateRouter";
+import companyRouter from "./companies/companyRouter";
+import jobofferRouter from "./job-offer/jobofferRouter";
 
-  const schema = makeExecutableSchema({
-    typeDefs,
-    resolvers,
-  });
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-  const server = new ApolloServer({
-    schema: schema,
-  });
+app.use("/api/jobOffer", jobofferRouter);
+app.use("/api/candidate", candidateRouter);
+app.use("/api/company", companyRouter);
 
-  await server.start();
-  server.applyMiddleware({ app, path: "/graphql" });
+app.use((req, res, next) => {
+  res.status(500).send("Something is broken!");
+});
 
-  //   app.get("/matchingCompanies/:id", async (req, res) => {
-  //     const { id } = req.params;
-  //     console.log(process.cwd());
-  //     const exec = require("child_process").exec;
-  //     const execPromise = promisify(exec);
-  //     let func = "candidate"; //func = candidate-companies to candidate,func=company rate company
-  //     let candidates = "malcolm jones"; //if func = candidates then candidate is single user full_name, func=company candidates list of full name
-  //     const parent = execPromise(
-  //       `/usr/bin/python3 Talent.AI/clustering/k-means.py --func ${func} --cand ${candidates}`
-  //     );
-  //     parent.child.stdout.on("data", (data) => {
-  //       process.stdout.write(`data on stdout:${data}`);
-  //     });
-  //     parent.child.stderr.on("data", (data) => {
-  //       process.stderr.write(`data on stderr:${data}`);
-  //     });
-  //     parent.child.on("close", (code) => {
-  //       console.log(`close in code:${code}`);
-  //     });
-  //     await parent;
-  //     console.log("python done");
-  //     res.send("python done");
-  //   });
-
-  app.listen(process.env.SERVER_PORT, () => {
-    console.log(
-      `Server ready at http://localhost:${process.env.SERVER_PORT}/graphql`
-    );
-  });
-}
-
-startApolloServer();
+app.listen(port, () => console.log("Express server is running on port ", port));

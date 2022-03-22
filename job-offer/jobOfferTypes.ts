@@ -20,6 +20,7 @@ export interface JobOffer {
   education: education[];
   candidates_id: string[];
   status: string;
+  job_offer_ID: string;
 }
 
 export interface experience {
