@@ -34,7 +34,7 @@ const candidateSchema = new Schema(
     first_name: { type: String },
     last_name: { type: String },
     gender: { type: String },
-    birth_year: { type: String },
+    birth_year: { type: Number },
     birth_date: { type: String },
     industry: { type: String },
     job_title: { type: String },
