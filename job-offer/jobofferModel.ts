@@ -30,7 +30,6 @@ const educationSchema = new Schema({
 
 const jobOfferSchema = new Schema(
   {
-    _id: { type: String },
     job_offer_ID: { type: String },
     full_name: { type: String },
     first_name: { type: String },
