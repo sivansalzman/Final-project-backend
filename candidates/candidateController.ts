@@ -65,7 +65,7 @@ const CandidateController = {
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },
 
-  matchingCompanies: async (req, res) => {},
+  forAlgo: async (req, res) => {},
 };
 
 export default CandidateController;

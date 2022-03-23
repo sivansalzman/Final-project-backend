@@ -10,5 +10,5 @@ candidateRouter.post("/", CandidateController.addCandidate);
 candidateRouter.put("/:id", CandidateController.updateCandidate);
 candidateRouter.delete("/:id", CandidateController.deleteCandidate);
 
-candidateRouter.get("/matching", CandidateController.matchingCompanies);
+candidateRouter.get("/forAlgo", CandidateController.forAlgo);
 export default candidateRouter;

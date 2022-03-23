@@ -5,8 +5,9 @@ const JobofferController = {
     const params = {};
     if (req.query.candidates_id) {
       params["candidates_id"] = req.query.candidates_id;
+      console.log(params);
       await JobOfferCollection.find({
-        params: { $in: req.query.candidates_id },
+        id: { $in: req.query.candidates_id },
       })
         .then((docs) => {
           res.json(docs);
