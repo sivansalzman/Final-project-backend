@@ -45,8 +45,9 @@ const JobofferController = {
   },
   updateJobOffer: async (req, res) => {
     const updateJobOffer = req.body.updateJobOffer;
+    console.log(req.params.id);
     await JobOfferCollection.updateOne(
-      { id: req.params.id },
+      { _id: req.params.id },
       { $push: { candidates_id: updateJobOffer.candidates_id } }
     )
       .then((docs) => {
