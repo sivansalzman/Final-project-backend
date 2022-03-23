@@ -1,4 +1,7 @@
 import { CandidateCollection } from "./candidateModel";
+import { exec } from "child_process";
+import express from "express";
+import { promisify } from "util";
 
 const CandidateController = {
   getCandidates: async (req, res) => {
@@ -10,14 +13,19 @@ const CandidateController = {
           res.json(docs);
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-    } else if (req.query.candidates) {
-      await CandidateCollection.find({
-        id: { $in: req.query.candidates },
-      })
-        .then((docs) => {
-          res.json(docs);
-        })
-        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+      // } else if (req.query.candidates) {
+      //   params["full_name"] = req.query.candidates;
+      //   //console.log([req.query.candidates]);
+      //   //console.log(params);
+      //   await CandidateCollection.find({
+      //     params: {
+      //       $in: req.query.candidates,
+      //     },
+      //   })
+      //     .then((docs) => {
+      //       res.json(docs);
+      //     })
+      //     .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else {
       await CandidateCollection.find({})
         .then((docs) => {
@@ -56,6 +64,8 @@ const CandidateController = {
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },
+
+  matchingCompanies: async (req, res) => {},
 };
 
 export default CandidateController;

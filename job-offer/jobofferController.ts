@@ -4,10 +4,17 @@ const JobofferController = {
   getJobsOffers: async (req, res) => {
     const params = {};
     if (req.query.candidates_id) {
-      params["candidates_id"] = req.params.candidates_id;
+      params["candidates_id"] = req.query.candidates_id;
       await JobOfferCollection.find({
-        candidates_id: { $in: req.query.candidates_id },
+        params: { $in: req.query.candidates_id },
       })
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else if (req.query.job_company_name) {
+      params["job_company_name"] = req.query.job_company_name; // TODO: FIX
+      await JobOfferCollection.find(params)
         .then((docs) => {
           res.json(docs);
         })
@@ -37,7 +44,10 @@ const JobofferController = {
   },
   updateJobOffer: async (req, res) => {
     const updateJobOffer = req.body.updateJobOffer;
-    await JobOfferCollection.updateOne({ id: req.params.id }, updateJobOffer)
+    await JobOfferCollection.updateOne(
+      { id: req.params.id },
+      { $push: { candidates_id: updateJobOffer.candidates_id } }
+    )
       .then((docs) => {
         res.json(docs);
       })
