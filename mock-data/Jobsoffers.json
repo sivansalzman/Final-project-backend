@@ -15,7 +15,7 @@
     "job_company_name": "facebook",
     "job_start_date": "2020-03",
     "role_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    "status": "in progress",
+    "status": "In progress",
     "interests": [
       "travelling",
       "environment",
@@ -80,7 +80,7 @@
     "job_company_name": "google",
     "job_start_date": "2019-03",
     "role_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    "status": "in progress",
+    "status": "In progress",
     "interests": [
       "stocks (financial)",
       "new technologies",
@@ -174,7 +174,7 @@
     "job_company_name": "facebook",
     "job_start_date": "2010-05-17",
     "role_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    "status": "in progress",
+    "status": "In progress",
     "interests": ["outdoors", "electronics", "reading"],
     "skills": [
       "javascript",
@@ -215,7 +215,7 @@
     "job_company_name": "amazon",
     "job_start_date": "2021-01",
     "role_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    "status": "in progress",
+    "status": "In progress",
     "interests": [
       "programming",
       "paintball",

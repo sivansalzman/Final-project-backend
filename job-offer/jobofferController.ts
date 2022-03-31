@@ -36,8 +36,9 @@ const JobofferController = {
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },
   addJobOffer: async (req, res) => {
-    const addJoboffer = req.body.addJoboffer;
-    await JobOfferCollection.insertMany(addJoboffer)
+    const addJobOffer = req.body.addJobOffer;
+    console.log(req.body.addJobOffer);
+    await JobOfferCollection.insertMany(addJobOffer)
       .then((docs) => {
         res.json(docs);
       })
@@ -45,18 +46,31 @@ const JobofferController = {
   },
   updateJobOffer: async (req, res) => {
     const updateJobOffer = req.body.updateJobOffer;
-    console.log(req.params.id);
-    await JobOfferCollection.updateOne(
-      { _id: req.params.id },
-      { $push: { candidates_id: updateJobOffer.candidates_id } }
-    )
-      .then((docs) => {
-        res.json(docs);
-      })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    if (updateJobOffer["candidates_id"]) {
+      await JobOfferCollection.updateOne(
+        { _id: req.params.id },
+        { $push: { candidates_id: updateJobOffer.candidates_id } }
+      )
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else {
+      const update = req.body.updateJobOffer;
+      console.log(update);
+      await JobOfferCollection.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: update },
+        { new: true, useFindAndModify: false }
+      )
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    }
   },
   deleteJobOffer: async (req, res) => {
-    await JobOfferCollection.findOneAndDelete({ id: req.params.id })
+    await JobOfferCollection.findOneAndDelete({ _id: req.params.id })
       .then((docs) => {
         res.json(docs);
       })
