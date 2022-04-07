@@ -4,7 +4,7 @@ import { CandidateCollection } from "./candidateModel";
 
 const candidateRouter = new Router();
 
-// candidateRouter.get("/", CandidateController.getCandidates);
+candidateRouter.get("/", CandidateController.getCandidates);
 candidateRouter.post("/forAlgo", CandidateController.forAlgo);
 candidateRouter.get("/:id", CandidateController.getCandidate);
 candidateRouter.post("/", CandidateController.addCandidate);

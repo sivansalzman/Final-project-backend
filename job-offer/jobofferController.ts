@@ -37,7 +37,6 @@ const JobofferController = {
   },
   addJobOffer: async (req, res) => {
     const addJobOffer = req.body.addJobOffer;
-    console.log(req.body.addJobOffer);
     await JobOfferCollection.insertMany(addJobOffer)
       .then((docs) => {
         res.json(docs);
@@ -57,7 +56,6 @@ const JobofferController = {
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else {
       const update = req.body.updateJobOffer;
-      console.log(update);
       await JobOfferCollection.findOneAndUpdate(
         { _id: req.params.id },
         { $set: update },
