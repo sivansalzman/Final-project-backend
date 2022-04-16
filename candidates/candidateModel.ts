@@ -30,7 +30,7 @@ const educationSchema = new Schema({
 
 const candidateSchema = new Schema(
   {
-    // _id: { type: String },
+    googleID: { type: String },
     full_name: { type: String },
     first_name: { type: String },
     last_name: { type: String },

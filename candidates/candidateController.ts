@@ -3,13 +3,14 @@ import { promisify } from "util";
 import { exec } from "child_process";
 
 const companies_for_user = async (mode, candidates) => {
-
   const execPromise = promisify(exec);
   const python_path = "/usr/local/bin/python3";
   const script_path = "../Talent.AI/programFlow/kMeans.py";
 
-  const promise = execPromise(`${python_path} ${script_path} --func candidate --cand ${candidates}`, { cwd: "/Users/guyshenkar/Documents/private/final project/Talent.AI" });
-
+  const promise = execPromise(
+    `${python_path} ${script_path} --func candidate --cand ${candidates}`,
+    { cwd: "/Users/guyshenkar/Documents/private/final project/Talent.AI" }
+  );
 
   promise.child.stdout.on("data", async (data) => {
     process.stdout.write(`data on stdout:${data}`);
@@ -32,7 +33,6 @@ const companies_for_user = async (mode, candidates) => {
   await promise;
 };
 
-
 const CandidateController = {
   getCandidates: async (req, res) => {
     const params = {};
@@ -43,19 +43,13 @@ const CandidateController = {
           res.json(docs);
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-      // } else if (req.query.candidates) {
-      //   params["full_name"] = req.query.candidates;
-      //   //console.log([req.query.candidates]);
-      //   //console.log(params);
-      //   await CandidateCollection.find({
-      //     params: {
-      //       $in: req.query.candidates,
-      //     },
-      //   })
-      //     .then((docs) => {
-      //       res.json(docs);
-      //     })
-      //     .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else if (req.query.googleID) {
+      params["googleID"] = req.query.googleID;
+      await CandidateCollection.find(params)
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else {
       await CandidateCollection.find({})
         .then((docs) => {
@@ -98,16 +92,14 @@ const CandidateController = {
   },
 
   forAlgo: async (req, res) => {
+    const candidates = req.body.candidates;
 
-    const candidates = req.body.candidates
-
-    companies_for_user("candidate", candidates)
-
+    companies_for_user("candidate", candidates);
 
     await CandidateCollection.find()
       .then((docs) => {
-        const cands = docs.filter((c) => candidates.includes(c['full_name']))
-        res.json(cands)
+        const cands = docs.filter((c) => candidates.includes(c["full_name"]));
+        res.json(cands);
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },

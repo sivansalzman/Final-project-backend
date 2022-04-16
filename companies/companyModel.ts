@@ -15,6 +15,7 @@ const locationSchema = new Schema({
 
 const companySchema = new Schema(
   {
+    googleID: { type: String },
     name: { type: String },
     size: { type: String },
     employee_count: { type: Number },

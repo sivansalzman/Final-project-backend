@@ -1,6 +1,5 @@
 const { Router } = require("express");
 import CandidateController from "./candidateController";
-import { CandidateCollection } from "./candidateModel";
 
 const candidateRouter = new Router();
 
