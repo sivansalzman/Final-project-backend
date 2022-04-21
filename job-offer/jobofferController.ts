@@ -45,6 +45,7 @@ const JobofferController = {
   },
   updateJobOffer: async (req, res) => {
     const updateJobOffer = req.body.updateJobOffer;
+    console.log(req.body);
     if (updateJobOffer["candidates_id"]) {
       await JobOfferCollection.updateOne(
         { _id: req.params.id },
