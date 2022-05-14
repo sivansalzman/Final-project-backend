@@ -1,12 +1,24 @@
 import { CompanyCollection } from "./companyModel";
 
-const ComController = {
+const CompanyController = {
   getCompanies: async (req, res) => {
-    await CompanyCollection.find({})
-      .then((docs) => {
-        res.json(docs);
-      })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    const params = {};
+    console.log(req.query);
+    if (req.query.company_name) {
+      console.log(req.query.company_name);
+      params["name"] = req.query.company_name;
+      await CompanyCollection.find(params)
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else {
+      await CompanyCollection.find({})
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    }
   },
   getCompany: async (req, res) => {
     await CompanyCollection.findById({ _id: req.params.id })
@@ -40,4 +52,4 @@ const ComController = {
   },
 };
 
-export default ComController;
+export default CompanyController;

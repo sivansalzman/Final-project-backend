@@ -12,8 +12,9 @@ const usersSchema = new Schema(
     gender: { type: String },
     birth_year: { type: Number },
     birth_date: { type: String },
-    candidate: { type: Boolean },
-    company: { type: Boolean },
+    isCandidate: { type: Boolean },
+    isCompany: { type: Boolean },
+    companyName: { type: String },
   },
   { collection: "users" }
 );

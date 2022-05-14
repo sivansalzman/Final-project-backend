@@ -3,6 +3,7 @@ import { JobOfferCollection } from "./jobofferModel";
 const JobofferController = {
   getJobsOffers: async (req, res) => {
     const params = {};
+    console.log(req.query);
     if (req.query.candidates_id) {
       params["candidates_id"] = req.query.candidates_id;
       console.log(params);
@@ -14,6 +15,7 @@ const JobofferController = {
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else if (req.query.job_company_name) {
+      console.log(req.query);
       params["job_company_name"] = req.query.job_company_name; // TODO: FIX
       await JobOfferCollection.find(params)
         .then((docs) => {
@@ -37,6 +39,7 @@ const JobofferController = {
   },
   addJobOffer: async (req, res) => {
     const addJobOffer = req.body.addJobOffer;
+    addJobOffer["status"] = "Waiting";
     await JobOfferCollection.insertMany(addJobOffer)
       .then((docs) => {
         res.json(docs);
@@ -45,7 +48,6 @@ const JobofferController = {
   },
   updateJobOffer: async (req, res) => {
     const updateJobOffer = req.body.updateJobOffer;
-    console.log(req.body);
     if (updateJobOffer["candidates_id"]) {
       await JobOfferCollection.updateOne(
         { _id: req.params.id },
@@ -55,15 +57,33 @@ const JobofferController = {
           res.json(docs);
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-    } else {
-      const update = req.body.updateJobOffer;
-      await JobOfferCollection.findOneAndUpdate(
+    } else if (updateJobOffer["candidates_id_new"]) {
+      console.log(updateJobOffer);
+      await JobOfferCollection.updateOne(
         { _id: req.params.id },
-        { $set: update },
-        { new: true, useFindAndModify: false }
+        { $set: { candidates_id: updateJobOffer.candidates_id_new } }
       )
         .then((docs) => {
           res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else if (updateJobOffer["skills"] !== undefined) {
+      await JobOfferCollection.updateMany(
+        { _id: req.params.id },
+        { $push: { skills: { $each: updateJobOffer["skills"] } } }
+      )
+        .then((docs) => {
+          console.log(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else {
+      console.log(updateJobOffer);
+      await JobOfferCollection.updateOne(
+        { _id: req.params.id },
+        updateJobOffer.update
+      )
+        .then((docs) => {
+          console.log(docs);
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     }

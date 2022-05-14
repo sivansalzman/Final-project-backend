@@ -49,6 +49,7 @@ const candidateSchema = new Schema(
     skills: { type: [String] },
     experience: { type: [experienceSchema] },
     education: { type: [educationSchema] },
+    personalInfo: { type: String },
   },
   { collection: "candidates" }
 );

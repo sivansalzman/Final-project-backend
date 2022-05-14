@@ -1,5 +1,4 @@
 const passport = require("passport");
-const bcrypt = require("bcryptjs");
 import { UsersCollection } from "./userModel";
 
 const UserController = {
@@ -18,6 +17,17 @@ const UserController = {
     })(req, res, next);
   },
 
+  editUser: async (req, res) => {
+    const updateUser = req.body.updateUser;
+    console.log(req.params.id);
+    console.log(updateUser);
+    await UsersCollection.updateOne({ _id: req.params.id }, updateUser)
+      .then((docs) => {
+        console.log(docs + "success");
+      })
+      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+  },
+
   userLogout: async (req, res) => {
     req.logout();
     res.send({ msg: "User logged-out" });
@@ -25,8 +35,14 @@ const UserController = {
 
   addUser: async (user, req, res) => {
     const newUser = user;
+    console.log(newUser);
+    // newUser["company"] = false;
+    // newUser["candidate"] = false;
     await UsersCollection.insertMany(newUser)
-      .then((docs) => {
+      .then(async (docs) => {
+        // await await CandidateCollection.insertMany({
+        //   first_name: user.first_name,
+        // });
         res.json(docs);
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));

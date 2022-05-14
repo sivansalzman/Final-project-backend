@@ -30,7 +30,6 @@ const educationSchema = new Schema({
 
 const jobOfferSchema = new Schema(
   {
-    job_offer_ID: { type: String },
     full_name: { type: String },
     first_name: { type: String },
     last_name: { type: String },
@@ -51,6 +50,7 @@ const jobOfferSchema = new Schema(
     education: { type: [educationSchema] },
     status: { type: String },
     candidates_id: { type: [String] },
+    job_description: { type: String },
   },
   { collection: "jobOffers" }
 );

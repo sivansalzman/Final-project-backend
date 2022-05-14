@@ -20,6 +20,19 @@ const googleAuthController = {
     res.send("logout");
   },
 
+  editUser: async (req, res) => {
+    const updateUser = req.body.updateUser;
+    console.log(req.body.updateUser);
+    await UsersCollection.updateOne(
+      { id: req.params.id },
+      updateUser.updateUser
+    )
+      .then((docs) => {
+        res.json(docs);
+      })
+      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+  },
+
   googleAuth: async (req, res, next) => {
     let token = req.body.token;
     let payload = await verify(token);
@@ -27,6 +40,7 @@ const googleAuthController = {
     await UsersCollection.findOne({ googleID: payload["sub"] })
       .then((docs) => {
         if (docs) {
+          console.log(docs);
           res.cookie("user", docs);
           res.json(docs);
         } else {
@@ -37,6 +51,9 @@ const googleAuthController = {
             last_name: payload["family_name"],
             email: payload["email"],
             avatar: payload["picture"],
+            isCandidate: req.body.isCandidate,
+            isCompany: req.body.isCompany,
+            companyName: req.body.companyName,
           };
           userController.addUser(user, req, res);
         }

@@ -16,10 +16,8 @@ const companies_for_user = async (mode, candidates) => {
     process.stdout.write(`data on stdout:${data}`);
     if (data.startsWith("$$")) {
       data = data.slice(2);
-      // console.log(data)
       let jsonData1 = JSON.stringify(data);
       let jsonData = await JSON.parse(jsonData1);
-      console.log(jsonData);
     }
   });
 
@@ -67,6 +65,7 @@ const CandidateController = {
   },
   addCandidate: async (req, res) => {
     const addCandidate = req.body.addCandidate;
+    console.log(addCandidate);
     await CandidateCollection.insertMany(addCandidate)
       .then((docs) => {
         res.json(docs);
@@ -75,12 +74,26 @@ const CandidateController = {
   },
 
   updateCandidate: async (req, res) => {
-    const updateCandidate = req.body.updateCandidate;
-    await CandidateCollection.updateOne({ id: req.params.id }, updateCandidate)
-      .then((docs) => {
-        console.log(docs);
-      })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    const updateCandidate = req.body.update;
+    if (updateCandidate["skills"] !== []) {
+      await CandidateCollection.updateMany(
+        { _id: req.params.id },
+        { $push: { skills: { $each: updateCandidate["skills"] } } }
+      )
+        .then((docs) => {
+          console.log(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    } else {
+      await CandidateCollection.updateOne(
+        { id: req.params.id },
+        updateCandidate
+      )
+        .then((docs) => {
+          console.log(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    }
   },
 
   deleteCandidate: async (req, res) => {
