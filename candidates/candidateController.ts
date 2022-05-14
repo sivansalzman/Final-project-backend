@@ -76,12 +76,14 @@ const CandidateController = {
   updateCandidate: async (req, res) => {
     const updateCandidate = req.body.update;
     if (updateCandidate["skills"] !== []) {
+      console.log(updateCandidate);
       await CandidateCollection.updateMany(
         { _id: req.params.id },
-        { $push: { skills: { $each: updateCandidate["skills"] } } }
+        { skills: updateCandidate["skills"] }
       )
         .then((docs) => {
           console.log(docs);
+          res.json(docs);
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else {
