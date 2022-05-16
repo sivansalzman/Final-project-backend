@@ -40,6 +40,14 @@ const JobofferController = {
   addJobOffer: async (req, res) => {
     const addJobOffer = req.body.addJobOffer;
     addJobOffer["status"] = "Waiting";
+    addJobOffer["full_name"] = "",
+    addJobOffer["first_name"] = "";
+    addJobOffer["last_name"] = "";
+    addJobOffer["gender"] = "";
+    addJobOffer["birth_year"] = "";
+    addJobOffer["birth_date"] = "";
+    addJobOffer["experience"] = [];
+    addJobOffer["education"] = [];
     await JobOfferCollection.insertMany(addJobOffer)
       .then((docs) => {
         res.json(docs);
