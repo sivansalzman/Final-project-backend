@@ -4,7 +4,7 @@ import CandidateController from "./candidateController";
 const candidateRouter = new Router();
 
 candidateRouter.get("/", CandidateController.getCandidates);
-candidateRouter.post("/forAlgo", CandidateController.forAlgo);
+candidateRouter.get("/forAlgo", CandidateController.forAlgo);
 candidateRouter.get("/:id", CandidateController.getCandidate);
 candidateRouter.post("/", CandidateController.addCandidate);
 candidateRouter.put("/:id", CandidateController.updateCandidate);

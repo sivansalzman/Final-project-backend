@@ -42,6 +42,7 @@ const CandidateController = {
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else if (req.query.googleID) {
+      console.log(req.query.googleID);
       params["googleID"] = req.query.googleID;
       await CandidateCollection.find(params)
         .then((docs) => {
@@ -76,8 +77,9 @@ const CandidateController = {
   updateCandidate: async (req, res) => {
     const updateCandidate = req.body.update;
     if (updateCandidate["skills"] !== []) {
+      console.log(updateCandidate);
       await CandidateCollection.updateMany(
-        { _id: req.params.id },
+        { id: req.params.id },
         { $push: { skills: { $each: updateCandidate["skills"] } } }
       )
         .then((docs) => {
@@ -105,16 +107,10 @@ const CandidateController = {
   },
 
   forAlgo: async (req, res) => {
-    const candidates = req.body.candidates;
-
-    companies_for_user("candidate", candidates);
-
-    await CandidateCollection.find()
-      .then((docs) => {
-        const cands = docs.filter((c) => candidates.includes(c["full_name"]));
-        res.json(cands);
-      })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    // fetch candidate from db
+    // remove keys - _id,googleID from object
+    // http req to algo service with candidate
+    // return ans
   },
 };
 
