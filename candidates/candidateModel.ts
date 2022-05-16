@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const experienceSchema = new Schema({
   company_id: { type: String },
   company_name: { type: String },
-  company_founded: { type: String },
+  company_founded: { type: Number },
   company_industry: { type: String },
   company_size: { type: String },
   current_job: { type: Boolean },
