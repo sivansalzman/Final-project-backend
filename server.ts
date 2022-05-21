@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT || 3000;
+
 import candidateRouter from "./candidates/candidateRouter";
 import companyRouter from "./companies/companyRouter";
 import jobofferRouter from "./job-offer/jobofferRouter";
@@ -13,11 +14,11 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.all('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
-  });
+app.all("/", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.use("/api/auth", googleAuthRouter);
 app.use("/api/jobOffer", jobofferRouter);

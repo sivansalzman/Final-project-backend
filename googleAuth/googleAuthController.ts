@@ -7,7 +7,7 @@ const verify = async (token) => {
   const ticket = await client
     .verifyIdToken({
       idToken: token,
-      audience: process.env.CLIENT_ID,
+      audience: process.env.CLIENT_ID_OLD,
     })
     .catch((err) => console.log(err));
   return ticket.getPayload();
@@ -35,6 +35,7 @@ const googleAuthController = {
 
   googleAuth: async (req, res, next) => {
     let token = req.body.token;
+    console.log(token)
     let payload = await verify(token);
 
     await UsersCollection.findOne({ googleID: payload["sub"] })
