@@ -130,16 +130,15 @@ const JobofferController = {
 
     rankCandidates: async (req, res) => {
         try {
-            console.log(req.params.id)
             let jobOffer = await getJobOfferHelper(req.params.id)
 
             const candidates_ids = req.body.candidates
-            const gender = req.body.gender
-            const age = req.body.age
+            const bias = req.body.bias
+
 
             let candidates: any = await getCandidatesHelper(candidates_ids)
 
-            const data = { "candidates": candidates, "job_offer": jobOffer, "gender": gender, "age": age }
+            const data = { "candidates": candidates, "job_offer": jobOffer, "bias": bias }
 
             const response = await (await axios.post("http://127.0.0.1:4000/api/company", data)).data
 

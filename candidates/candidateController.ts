@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 const getCandidatehelper = async (id) => {
     try {
-        return await CandidateCollection.findOne({ id: id }).lean()
+        return await CandidateCollection.findById(new ObjectId(id)).lean()
             .then((docs) => {
                 return docs;
             })
@@ -110,6 +110,7 @@ const CandidateController = {
     forAlgo: async (req, res) => {
         try {
             const candidate = await getCandidatehelper(req.params.id);
+            console.log(candidate.full_name)
 
             const percents = await axios.post(
                 "http://127.0.0.1:4000/api/candidate",
