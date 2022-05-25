@@ -8,5 +8,6 @@ jobofferRouter.get("/:id", JobofferController.getJobOffer);
 jobofferRouter.post("/", JobofferController.addJobOffer);
 jobofferRouter.put("/:id", JobofferController.updateJobOffer);
 jobofferRouter.delete("/:id", JobofferController.deleteJobOffer);
+jobofferRouter.post("/rankCandidates/:id", JobofferController.rankCandidates);
 
 export default jobofferRouter;
