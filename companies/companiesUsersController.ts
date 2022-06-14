@@ -2,6 +2,7 @@ import { CompanyUsersCollection } from "./companiesUsersModel";
 
 const CompanyUsersController = {
   getCompaniesUsers: async (req, res) => {
+    console.log("here");
     const params = {};
     if (req.query.googleID) {
       console.log(req.query.googleID);
