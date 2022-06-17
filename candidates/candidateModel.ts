@@ -1,17 +1,17 @@
 import { Schema, model } from "mongoose";
 
 const experienceSchema = new Schema({
-  company_id: { type: String },
   company_name: { type: String },
+  company_size: { type: String },
+  company_id: { type: String },
   company_founded: { type: Number },
   company_industry: { type: String },
-  company_size: { type: String },
+  end_date: { type: String },
+  start_date: { type: String },
   current_job: { type: Boolean },
   company_location_name: { type: String },
   company_location_country: { type: String },
   company_location_continent: { type: String },
-  end_date: { type: String },
-  start_date: { type: String },
   title_name: { type: String },
   title_role: { type: String },
   title_levels: { type: [String] },
@@ -20,12 +20,12 @@ const experienceSchema = new Schema({
 const educationSchema = new Schema({
   school_name: { type: String },
   school_type: { type: String },
-  degrees: { type: [String] },
-  start_date: { type: String },
   end_date: { type: String },
+  start_date: { type: String },
+  gpa: { type: Number },
+  degrees: { type: [String] },
   majors: { type: [String] },
   minors: { type: [String] },
-  gpa: { type: Number },
 });
 
 const candidateSchema = new Schema(
@@ -50,6 +50,7 @@ const candidateSchema = new Schema(
     experience: { type: [experienceSchema], default: [] },
     education: { type: [educationSchema], default: [] },
     personalInfo: { type: String, default: "" },
+    email: { type: String, default: "" },
   },
   { collection: "candidates" }
 );

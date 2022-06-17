@@ -2,8 +2,6 @@ import { JobOfferCollection } from "./jobofferModel";
 import { getCandidatesHelper } from "../candidates/candidateController";
 const mongoose = require("mongoose");
 import axios from "axios";
-import { KeyObject } from "crypto";
-const ObjectId = mongoose.Types.ObjectId;
 
 const getJobOfferHelper = async (id) => {
   console.log(id);
@@ -53,16 +51,6 @@ const JobofferController = {
 
   addJobOffer: async (req, res) => {
     const addJobOffer = req.body.addJobOffer;
-    addJobOffer["status"] = "Waiting";
-    addJobOffer["full_name"] = "";
-    addJobOffer["first_name"] = "";
-    addJobOffer["last_name"] = "";
-    addJobOffer["gender"] = "";
-    addJobOffer["birth_year"] = "";
-    addJobOffer["birth_date"] = "";
-    addJobOffer["experience"] = [];
-    addJobOffer["education"] = [];
-    console.log(addJobOffer);
 
     await JobOfferCollection.insertMany(addJobOffer)
       .then((docs) => {
@@ -73,45 +61,34 @@ const JobofferController = {
 
   updateJobOffer: async (req, res) => {
     const updateJobOffer = req.body.updateJobOffer;
-    if (updateJobOffer["candidates_id"]) {
-      await JobOfferCollection.updateOne(
-        { _id: req.params.id },
-        { $push: { candidates_id: updateJobOffer.candidates_id } }
-      )
-        .then((docs) => {
-          res.json(docs);
-        })
-        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-    } else if (updateJobOffer["candidates_id_new"]) {
-      console.log(updateJobOffer);
-      await JobOfferCollection.updateOne(
-        { _id: req.params.id },
-        { $set: { candidates_id: updateJobOffer.candidates_id_new } }
-      )
-        .then((docs) => {
-          res.json(docs);
-        })
-        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-    } else if (updateJobOffer["skills"] !== undefined) {
-      await JobOfferCollection.updateMany(
-        { _id: req.params.id },
-        { $push: { skills: { $each: updateJobOffer["skills"] } } }
-      )
-        .then((docs) => {
-          console.log(docs);
-        })
-        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-    } else {
-      console.log(updateJobOffer);
-      await JobOfferCollection.updateOne(
-        { _id: req.params.id },
-        updateJobOffer.update
-      )
-        .then((docs) => {
-          console.log(docs);
-        })
-        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-    }
+    console.log(updateJobOffer);
+    // if (updateJobOffer["candidates_id"] !== undefined) {
+    //   await JobOfferCollection.updateOne(
+    //     { _id: req.params.id },
+    //     { $push: { candidates_id: updateJobOffer.candidates_id } }
+    //   )
+    //     .then((docs) => {
+    //       res.json(docs);
+    //     })
+    //     .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    // } else if (updateJobOffer["candidates_id_new"] !== undefined) {
+    //   console.log(updateJobOffer);
+    //   await JobOfferCollection.updateOne(
+    //     { _id: req.params.id },
+    //     { $set: { candidates_id: updateJobOffer.candidates_id_new } }
+    //   )
+    //     .then((docs) => {
+    //       res.json(docs);
+    //     })
+    //     .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    // } else {
+    console.log(updateJobOffer);
+    await JobOfferCollection.updateMany({ _id: req.params.id }, updateJobOffer)
+      .then((docs) => {
+        res.json(docs);
+      })
+      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    //}
   },
 
   deleteJobOffer: async (req, res) => {
