@@ -91,6 +91,39 @@ const JobofferController = {
     //}
   },
 
+  updateJobOfferExp: async (req, res) => {
+    const updateExperience = req.body.updateExperience;
+    await JobOfferCollection.updateMany(
+      { _id: req.params.id },
+      {
+        $set: {
+          [`experience.${req.params.index}`]: updateExperience,
+        },
+      }
+    )
+      .then((docs) => {
+        res.json(docs);
+      })
+      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+  },
+
+  deleteJobOfferExp: async (req, res) => {
+    console.log(req.params.index);
+    await JobOfferCollection.updateOne(
+      { _id: req.params.id },
+      {
+        $pull: {
+          experience: { title_name: req.params.index },
+        },
+      }
+    )
+      .then((docs) => {
+        res.json(docs);
+        console.log(docs);
+      })
+      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+  },
+
   deleteJobOffer: async (req, res) => {
     await JobOfferCollection.findOneAndDelete({ _id: req.params.id })
       .then((docs) => {

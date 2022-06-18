@@ -1,20 +1,20 @@
 import { Schema, model } from "mongoose";
 
 const experienceSchema = new Schema({
-  company_name: { type: String },
-  company_size: { type: String },
-  company_id: { type: String },
-  company_founded: { type: Number },
-  company_industry: { type: String },
-  end_date: { type: String },
-  start_date: { type: String },
-  current_job: { type: Boolean },
-  company_location_name: { type: String },
-  company_location_country: { type: String },
-  company_location_continent: { type: String },
-  title_name: { type: String },
-  title_role: { type: String },
-  title_levels: { type: [String] },
+  company_name: { type: String, default: "" },
+  company_size: { type: String, default: "" },
+  company_id: { type: String, default: "" },
+  company_founded: { type: Number, default: 0 },
+  company_industry: { type: String, default: "" },
+  end_date: { type: String, default: "" },
+  start_date: { type: String, default: "" },
+  current_job: { type: Boolean, default: false },
+  company_location_name: { type: String, default: "" },
+  company_location_country: { type: String, default: "" },
+  company_location_continent: { type: String, default: "" },
+  title_name: { type: String, default: "" },
+  title_role: { type: String, default: "" },
+  title_levels: { type: [String], default: [] },
 });
 
 const educationSchema = new Schema({
