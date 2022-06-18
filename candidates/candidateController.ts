@@ -128,16 +128,12 @@ const CandidateController = {
   forAlgo: async (req, res) => {
     try {
       const candidate = await getCandidatehelper(req.params.id);
-      console.log(candidate);
+      // console.log(candidate);
       const percents = await axios.post(
         "http://127.0.0.1:4000/api/candidate",
         candidate
       );
-      console.log(percents);
-      const sortable = Object.entries(percents.data)
-        .sort(([, a], [, b]) => a[0] - b[0])
-        .reduce((r, [k, v]) => ({ ...r, [k]: v[0] }), {});
-      res.json({ data: sortable, order: Object.keys(sortable) });
+      res.json({ data: percents.data.res, order: percents.data.order });
     } catch (err) {
       console.log(err);
     }
