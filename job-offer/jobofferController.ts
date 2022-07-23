@@ -24,7 +24,7 @@ const JobofferController = {
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else if (req.query.job_company_name) {
-      params["job_company_name"] = req.query.job_company_name; // TODO: FIX
+      params["job_company_name"] = req.query.job_company_name;
       await JobOfferCollection.find(params)
         .then((docs) => {
           res.json(docs);
