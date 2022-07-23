@@ -3,9 +3,7 @@ import { CompanyCollection } from "./companyModel";
 const CompanyController = {
   getCompanies: async (req, res) => {
     const params = {};
-    console.log(req.query);
     if (req.query.company_name) {
-      console.log(req.query.company_name);
       params["name"] = req.query.company_name;
       await CompanyCollection.find(params)
         .then((docs) => {

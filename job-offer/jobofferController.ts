@@ -1,10 +1,8 @@
 import { JobOfferCollection } from "./jobofferModel";
 import { getCandidatesHelper } from "../candidates/candidateController";
-const mongoose = require("mongoose");
 import axios from "axios";
 
 const getJobOfferHelper = async (id) => {
-  console.log(id);
   return await JobOfferCollection.findById(id)
     .lean()
     .then((docs) => {
@@ -16,10 +14,8 @@ const getJobOfferHelper = async (id) => {
 const JobofferController = {
   getJobsOffers: async (req, res) => {
     const params = {};
-    console.log(req.query);
     if (req.query.candidates_id) {
       params["candidates_id"] = req.query.candidates_id;
-      console.log(params);
       await JobOfferCollection.find({
         id: { $in: req.query.candidates_id },
       })
@@ -28,7 +24,6 @@ const JobofferController = {
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else if (req.query.job_company_name) {
-      console.log(req.query);
       params["job_company_name"] = req.query.job_company_name; // TODO: FIX
       await JobOfferCollection.find(params)
         .then((docs) => {
@@ -61,7 +56,6 @@ const JobofferController = {
 
   updateJobOffer: async (req, res) => {
     const updateJobOffer = req.body.updateJobOffer;
-    console.log(updateJobOffer);
     if (updateJobOffer["candidates_id"] !== undefined) {
       await JobOfferCollection.updateOne(
         { _id: req.params.id },
@@ -72,7 +66,6 @@ const JobofferController = {
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else if (updateJobOffer["candidates_id_new"] !== undefined) {
-      console.log(updateJobOffer);
       await JobOfferCollection.updateOne(
         { _id: req.params.id },
         { $set: { candidates_id: updateJobOffer.candidates_id_new } }
@@ -82,7 +75,6 @@ const JobofferController = {
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     } else {
-      console.log(updateJobOffer);
       await JobOfferCollection.updateMany(
         { _id: req.params.id },
         updateJobOffer
@@ -111,7 +103,6 @@ const JobofferController = {
   },
 
   deleteJobOfferExp: async (req, res) => {
-    console.log(req.params.index);
     await JobOfferCollection.updateOne(
       { _id: req.params.id },
       {
@@ -122,7 +113,6 @@ const JobofferController = {
     )
       .then((docs) => {
         res.json(docs);
-        console.log(docs);
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },

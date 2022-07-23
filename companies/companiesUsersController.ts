@@ -2,10 +2,8 @@ import { CompanyUsersCollection } from "./companiesUsersModel";
 
 const CompanyUsersController = {
   getCompaniesUsers: async (req, res) => {
-    console.log("here");
     const params = {};
     if (req.query.googleID) {
-      console.log(req.query.googleID);
       params["googleID"] = req.query.googleID;
       await CompanyUsersCollection.find(params)
         .then((docs) => {
@@ -29,7 +27,6 @@ const CompanyUsersController = {
   },
   addCompanyUser: async (req, res) => {
     const addCompanyUser = req.body.addCompanyUser;
-    console.log(req.body);
     await CompanyUsersCollection.insertMany(addCompanyUser)
       .then((docs) => {
         res.json(docs);
@@ -43,7 +40,7 @@ const CompanyUsersController = {
       updateCompanyUser
     )
       .then((docs) => {
-        console.log(docs + "success");
+        console.log("Success update company user");
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },

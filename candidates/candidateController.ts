@@ -72,7 +72,6 @@ const CandidateController = {
 
   updateCandidate: async (req, res) => {
     const updateCandidate = req.body.update;
-    console.log(updateCandidate);
     await CandidateCollection.updateMany(
       { _id: req.params.id },
       updateCandidate
@@ -85,7 +84,6 @@ const CandidateController = {
 
   updateCandidateEducation: async (req, res) => {
     const updateEducation = req.body.updateEducation;
-    console.log(updateEducation);
     await CandidateCollection.updateOne(
       { _id: req.params.id },
       {
@@ -102,7 +100,6 @@ const CandidateController = {
 
   updateCandidateExperience: async (req, res) => {
     const updateExperience = req.body.updateExperience;
-    console.log(updateExperience);
     await CandidateCollection.updateMany(
       { _id: req.params.id },
       {
@@ -128,7 +125,6 @@ const CandidateController = {
   forAlgo: async (req, res) => {
     try {
       const candidate = await getCandidatehelper(req.params.id);
-      // console.log(candidate);
       const percents = await axios.post(
         "http://127.0.0.1:4000/api/candidate",
         candidate
